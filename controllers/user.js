@@ -5,12 +5,11 @@ const {response,request} =require('express')
 
     
 const getUsuarios=(req,res)=>{
-    res.send('Hello World')
+    res.send("Lista de Usuarios......")
 }
 
 const postUsuario=async (req=request,res=response)=>{
 const {nombre,apellido,correo,password}=req.body.userData
-console.log(req.body)
 if(!nombre){
    return res.status(401).json({
         message:'El nombre es necesario'
