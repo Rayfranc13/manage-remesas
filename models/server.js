@@ -25,7 +25,7 @@ Middlewares(){
 Routes(){
 
 this.app.use('/usuarios',require('../routes/user'))
-    
+    this.app.use('/auth',require('../routes/auth'))
 }
 
 

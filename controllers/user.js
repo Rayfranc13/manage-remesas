@@ -9,6 +9,11 @@ const getUsuarios=(req,res)=>{
 }
 
 const postUsuario=async (req=request,res=response)=>{
+    if(!req.body.userData){
+        res.status(401).json({
+            message:"El formulario enviado no es correcto"
+        })
+    }
 const {nombre,apellido,correo,password}=req.body.userData
 if(!nombre){
    return res.status(401).json({
