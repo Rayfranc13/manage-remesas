@@ -5,7 +5,7 @@ class Server{
 
     constructor(){
         this.app=express()
-        this.port=process.env.SERVER_ON_PORT
+        this.port=process.env.PORT
         this.Middlewares();
         this.Routes();
         this.Listen();
@@ -31,7 +31,7 @@ this.app.use('/usuarios',require('../routes/user'))
 
 Listen(){
 
-    this.app.listen(this.port,()=>
+    this.app.listen(this.port||5000,()=>
     console.log(`Server on port:${this.port}`))
 
 }
