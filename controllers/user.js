@@ -10,30 +10,30 @@ const getUsuarios=(req,res)=>{
 
 const postUsuario=async (req=request,res=response)=>{
     if(!req.body.userData){
-        res.status(401).json({
+        res.status(400).json({
             message:"El formulario enviado no es correcto"
         })
     }
 const {nombre,apellido,correo,password}=req.body.userData
 if(!nombre){
-   return res.status(401).json({
+   return res.status(400).json({
         message:'El nombre es necesario'
     })
 }
 if(!apellido){
-   return res.status(401).json({
+   return res.status(400).json({
         message:'El apellido es necesario'
     })
 }
 
 if(!correo){
-  return  res.status(401).json({
+  return  res.status(400).json({
         message:'El correo es necesario'
     })
 }
 
 if(!password){
-  return  res.status(401).json({
+  return  res.status(400).json({
         message:'El password es necesario'
     })
 }

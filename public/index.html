@@ -1,5 +1,40 @@
 <html>
-    <body>
-        <h1>Hello World</h1>
-    </body>
+    <head>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+   <body>
+       <div class="wrapper">
+           <div class="title">
+               <h2>Login</h2>
+           </div>
+           <hr style="margin: 0px 20px 20px 20px;">
+           <div class="form-component">
+           <span class="desc">Email:</span>
+           <input class="input" id="email" type="text" placeholder="Email here">
+        </div>
+        <div class="form-component">
+           <span class="desc">Password:</span>
+           <input class="input" id="password" type="password" placeholder="Password here">
+        </div>
+        <button class="submit" onclick="send();">Submit</button>
+        <div class="footer">
+            <span>Dont have an account?</span>
+            
+            
+            <a class="a" href="#">Sign Up</a>
+        
+        </div>
+       </div>
+   </body>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+function send(){
+        $.post('/auth/login',userData={
+            correo:document.getElementById("email").value,
+            password:document.getElementById("password").value
+        },(data,response)=>{
+console.log(data)
+        })
+    }
+    </script>
 </html>
