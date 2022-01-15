@@ -14,7 +14,7 @@ const getUsuarios=(req,res)=>{
 
 const postUsuario=async (req=request,res=response)=>{
    if (!req.body.nombre&&req.body.correo&&req.body.password&&req.body.rol){
-       res.status(400).json({
+      return res.status(400).json({
            message:'Parametros faltantes'
        })
    }
@@ -35,7 +35,7 @@ const usuario=new Usuario({nombre,correo,rol})
         }
        )
    }
-   res.json(
+  return res.json(
        {
            message:'El usuario se ah insertado',
            usuario
