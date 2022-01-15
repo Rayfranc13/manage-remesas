@@ -13,7 +13,7 @@ const getUsuarios=(req,res)=>{
 
 
 const postUsuario=async (req=request,res=response)=>{
-   if (!req.body.nombre&&req.body.correo&&req.body.password&&req.body.rol){
+   if (!(req.body.nombre&&req.body.correo&&req.body.password&&req.body.rol)){
       return res.status(400).json({
            message:'Parametros faltantes'
        })
