@@ -1,4 +1,6 @@
 const {response,request} =require('express')
+const  bcrypt=require('bcryptjs')
+
 const Usuario=require('../models/usuario')
 
 
@@ -11,8 +13,12 @@ const getUsuarios=(req,res)=>{
 
 
 const postUsuario=async (req=request,res=response)=>{
-   const body=req.body
-   const usuario=new Usuario(body);
+   const {nombre,correo,password, rol}=req.body
+const usuario=new Usuario({nombre,correo,rol})
+
+   const salt =bcrypt.genSaltSync()
+
+   usuario.password=bcrypt.hashSync(password,salt)
 
    try{
        await usuario.save();
