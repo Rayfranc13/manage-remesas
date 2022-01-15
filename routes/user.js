@@ -4,8 +4,8 @@ const router=Router()
 
 router.get('/',getUsuarios)
 router.post('/',postUsuario)
-router.put('/',)
-router.delete('/',)
+router.put('/:id',)
+router.delete('/:id',)
 
 
 
