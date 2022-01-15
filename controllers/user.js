@@ -13,7 +13,13 @@ const getUsuarios=(req,res)=>{
 
 
 const postUsuario=async (req=request,res=response)=>{
-   const {nombre,correo,password, rol}=req.body
+   if (!req.body.nombre&&req.body.correo&&req.body.password&&req.body.rol){
+       res.status(400).json({
+           message:'Parametros faltantes'
+       })
+   }
+   
+    const {nombre,correo,password, rol}=req.body
 const usuario=new Usuario({nombre,correo,rol})
 
    const salt =bcrypt.genSaltSync()
