@@ -9,7 +9,7 @@ router.post('/',[
     check('nombre','El nombre es obligatorio').not().isEmpty(),
     check('apellido','El apellido es obligatorio').not().isEmpty(),
     check('correo','El correo no es valido').isEmail(),
-    check('password','El nombre es obligatorio').isLength({min:6}),
+    check('password','El password deve tener al menos 6 caracteres').isLength({min:6}),
     check('rol','No es un rol valido').isIn(['ADMIN_ROLE','USER_ROLE']),
     validarCampos
 ],postUsuario)
