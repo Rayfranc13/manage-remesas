@@ -18,7 +18,8 @@ const postUsuario=async (req=request,res=response)=>{
 
 
 
-    const {nombre,correo,password, rol}=req.body
+    const {nombre,apellido,correo,password, rol}=req.body
+    const usuario=new Usuario({nombre,apellido,correo,rol})
 
 
    //Validacion de Correo
@@ -32,7 +33,7 @@ const postUsuario=async (req=request,res=response)=>{
 
 
    
-const usuario=new Usuario({nombre,correo,rol})
+
 
    const salt =bcrypt.genSaltSync()
 
