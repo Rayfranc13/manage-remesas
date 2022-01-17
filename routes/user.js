@@ -1,6 +1,7 @@
 const {Router}=require('express');
 const { check } = require('express-validator');
 const {getUsuarios,postUsuario} = require('../controllers/user');
+const {validarCampos}=require('../middlewares/validar_campos')
 const router=Router()
 
 router.get('/',getUsuarios)
