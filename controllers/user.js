@@ -5,6 +5,7 @@ const Usuario=require('../models/usuario')
 
 
 
+
     
 const getUsuarios=(req,res)=>{
     res.send("Lista de Usuarios......")
@@ -13,13 +14,24 @@ const getUsuarios=(req,res)=>{
 
 
 const postUsuario=async (req=request,res=response)=>{
-   if (!(req.body.nombre&&req.body.correo&&req.body.password&&req.body.rol)){
-      return res.status(400).json({
-           message:'Parametros faltantes'
+
+
+
+
+    const {nombre,correo,password, rol}=req.body
+
+
+   //Validacion de Correo
+   const existeCorreo= await usuario.findOne({correo})
+   if(existeCorreo){
+       return res.status(400).json({
+           message:'El correo ya esta registrado'
        })
    }
+
+
+
    
-    const {nombre,correo,password, rol}=req.body
 const usuario=new Usuario({nombre,correo,rol})
 
    const salt =bcrypt.genSaltSync()
