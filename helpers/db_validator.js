@@ -1,4 +1,4 @@
-const {Usuario}=require('../models/usuario')
+const Usuario=require('../models/usuario')
 
 const existeCorreo=async(correo='')=>{
 const existe= await Usuario.findOne({correo})

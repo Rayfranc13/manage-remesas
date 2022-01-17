@@ -16,7 +16,8 @@ const postUsuario=async (req=request,res=response)=>{
 
     const {nombre,apellido,correo,password, rol}=req.body
     const usuario=new Usuario({nombre,apellido,correo,rol})
-    const salt =bcrypt.genSaltSync()
+ 
+   const salt =bcrypt.genSaltSync()
 
    usuario.password=bcrypt.hashSync(password,salt)
 
