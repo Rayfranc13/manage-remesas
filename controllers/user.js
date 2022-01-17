@@ -1,6 +1,5 @@
 const {response,request} =require('express')
 const  bcrypt=require('bcryptjs')
-
 const Usuario=require('../models/usuario')
 
 
@@ -23,7 +22,7 @@ const postUsuario=async (req=request,res=response)=>{
 
 
    //Validacion de Correo
-   const existeCorreo= await usuario.findOne({correo})
+   const existeCorreo= await Usuario.findOne({correo})
    if(existeCorreo){
        return res.status(400).json({
            message:'El correo ya esta registrado'
