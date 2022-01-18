@@ -13,38 +13,49 @@ const getUsuarios=(req,res)=>{
 
 
 const postUsuario=async (req=request,res=response)=>{
-
     const {nombre,apellido,correo,password, rol}=req.body
     const usuario=new Usuario({nombre,apellido,correo,rol})
- 
-   const salt =bcrypt.genSaltSync()
+    const salt =bcrypt.genSaltSync()
 
-   usuario.password=bcrypt.hashSync(password,salt)
+    usuario.password=bcrypt.hashSync(password,salt)
 
-   try{
-       await usuario.save();
-   }catch(e){
-       res.status(400).json({
-         message:'Ha habido un error',
-         e
+    try{
+    await usuario.save();
+    }
+    catch(e){
+    res.status(400).json({
+    message:'Ha habido un error',
+        e
         }
-       )
-   }
-  return res.json(
-       {
-           message:'El usuario se ah insertado',
-           usuario
-
-       }
-   )
-
-
-
+    )
+    }
+    return res.json(
+    {
+        message:'El usuario se ah insertado',
+        usuario
+    }
+)
 }
 
 
+const putUsuario=async(req,res)=>{
+const {id}=req.params
+const {password,google,correo,...rest}=req.body
 
-  
+if(password){
+    const salt =bcrypt.genSaltSync()
+
+    rest.password=bcrypt.hashSync(password,salt)
+}
+
+const usuario=await Usuario.findByIdAndUpdate(id,rest)
+
+res.json({
+    message:'El usuario se ha actualizado con exito',
+    usuario
+})
+
+}
 
 
 
