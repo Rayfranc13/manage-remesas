@@ -62,5 +62,6 @@ res.json({
 
 module.exports={
     getUsuarios,
-    postUsuario
+    postUsuario,
+    putUsuario
 }

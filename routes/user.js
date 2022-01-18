@@ -1,6 +1,6 @@
 const {Router}=require('express');
 const { check } = require('express-validator');
-const {getUsuarios,postUsuario} = require('../controllers/user');
+const {getUsuarios,postUsuario, putUsuario} = require('../controllers/user');
 const {validarCampos}=require('../middlewares/validar_campos')
 const {existeCorreo}=require('../helpers/db_validator')
 const router=Router()
@@ -15,7 +15,7 @@ router.post('/',[
     check('rol','No es un rol valido').isIn(['ADMIN_ROLE','USER_ROLE']),
     validarCampos
 ],postUsuario)
-router.put('/:id',)
+router.put('/:id',putUsuario)
 router.delete('/:id',)
 
 
