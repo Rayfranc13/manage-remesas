@@ -6,12 +6,12 @@ const Usuario=require('../models/usuario')
 
 
     
-const getUsuarios=(req,res)=>{
+const getUsuarios=async(req,res)=>{
 const {limite=3,desde=0}=req.query
-const usuarios=Usuario.find()
+const usuarios= await Usuario.find()
 .skip(Number(desde))
 .limit(Number(limite))
-    res.send(usuarios)
+    res.json(usuarios)
 }
 
 
