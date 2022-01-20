@@ -7,8 +7,8 @@ const router=Router()
 
 router.get('/',[
     check('limite','El limite es un numero').isNumeric(),
-    check('desde','EL origen no es un numero').isNumeric()
-    
+    check('desde','EL origen no es un numero').isNumeric(),
+    validarCampos
 ],getUsuarios)
 
 router.post('/',[
