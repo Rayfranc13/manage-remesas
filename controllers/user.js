@@ -7,7 +7,11 @@ const Usuario=require('../models/usuario')
 
     
 const getUsuarios=(req,res)=>{
-    res.send("Lista de Usuarios......")
+const {limite=3,desde=0}=req.query
+const usuarios=Usuario.find()
+.skip(Number(desde))
+.limit(Number(limite))
+    res.send(usuarios)
 }
 
 

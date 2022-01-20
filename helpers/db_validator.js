@@ -7,6 +7,15 @@ if(existe){
 }
 }
 
+
+const existeUsuarioById=async(id)=>{
+    const existe= await Usuario.findById(id)
+    if(!existe){
+        throw new Error(`El usuario de id(${id}) no existe`)
+    }
+    }
+
 module.exports={
-    existeCorreo
+    existeCorreo,
+    existeUsuarioById
 }
