@@ -8,10 +8,14 @@ const Usuario=require('../models/usuario')
     
 const getUsuarios=async(req,res)=>{
 const {limite=3,desde=0}=req.query
-const usuarios= await Usuario.find()
+const usuarios= await Usuario.find({status:true})
 .skip(Number(desde))
 .limit(Number(limite))
-    res.json(usuarios)
+const cant= await Usuario.countDocuments({status:true})
+    res.json({
+        cantidad:cant,
+        usuarios
+    })
 }
 
 
@@ -58,7 +62,15 @@ res.json({
     message:'El usuario se ha actualizado con exito',
     usuario
 })
+}
 
+const deleteUsuario= async (req,res)=>{
+    const {id}=req.params
+ const usuario= await Usuario.findByIdAndUpdate(id,{status:false})
+ res.json({
+     message:'El usuario se ha eliminado con exito',
+     usuario
+ })
 }
 
 
@@ -67,5 +79,6 @@ res.json({
 module.exports={
     getUsuarios,
     postUsuario,
-    putUsuario
+    putUsuario,
+    deleteUsuario
 }
