@@ -8,10 +8,10 @@ const Usuario=require('../models/usuario')
     
 const getUsuarios=async(req,res)=>{
 const {limite=3,desde=0}=req.query
-const usuarios= await Usuario.find({status:true})
+const usuarios= await Usuario.find({estado:true})
 .skip(Number(desde))
 .limit(Number(limite))
-const cant= await Usuario.countDocuments({status:true})
+const cant= await Usuario.countDocuments({estado:true})
     res.json({
         cantidad:cant,
         usuarios
@@ -66,7 +66,7 @@ res.json({
 
 const deleteUsuario= async (req,res)=>{
     const {id}=req.params
- const usuario= await Usuario.findByIdAndUpdate(id,{status:false})
+ const usuario= await Usuario.findByIdAndUpdate(id,{estado:false})
  res.json({
      message:'El usuario se ha eliminado con exito',
      usuario
