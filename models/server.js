@@ -29,6 +29,7 @@ Routes(){
 
 this.app.use('/usuarios',require('../routes/user'))
     this.app.use('/auth',require('../routes/auth'))
+    this.app.use('/beneficiarios',require('../routes/beneficiario'))
 }
 
 async ConectarDB(){
