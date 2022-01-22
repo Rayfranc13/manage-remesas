@@ -13,10 +13,13 @@ router.get('/',[
 
 router.post('/',[
     check('nombre','El nombre es obligatorio').not().isEmpty(),
+    check('nombre','El nombre no puede ser un numero').isString(),
     check('apellido','El apellido es obligatorio').not().isEmpty(),
+    check('apellido','El apellido no puede ser un numero').isString(),
     check('correo','El correo no es valido').isEmail(),
     check('correo').custom(existeCorreo),
     check('password','El password deve tener al menos 6 caracteres').isLength({min:6}),
+    check('password','El password deve tener al menos 6 caracteres').isStrongPassword(),
     check('rol','No es un rol valido').isIn(['ADMIN_ROLE','USER_ROLE']),
     validarCampos
 ],postUsuario)
