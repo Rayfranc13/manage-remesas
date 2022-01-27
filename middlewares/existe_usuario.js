@@ -4,7 +4,7 @@ const Usuario=require('../models/usuario')
 
 const existUserByEmail= async(req,res,next)=>{
 const {correo,password}=req.body
-const usuario= await Usuario.findOne({correo})
+const usuario= await Usuario.findOne({correo}).select('password')
 if(!usuario){
     return res.status(400).json({
         message:'El correo o el password son incorrectos',
