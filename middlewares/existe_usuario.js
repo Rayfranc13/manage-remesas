@@ -12,7 +12,7 @@ if(!usuario){
     })
 }
 
-if(!usuario.status){
+if(usuario.status){
     return res.status(400).json({
         message:'El correo o el password son incorrectos'
     })
