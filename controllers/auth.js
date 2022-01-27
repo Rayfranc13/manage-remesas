@@ -12,7 +12,8 @@ const token=jwt.sign({_id},process.env.SECRETKEY,{
 
 
 return res.json({
-    message:'El usuario ah accedido con exito'
+    message:'El usuario ah accedido con exito',
+    token
 })
 
 }
