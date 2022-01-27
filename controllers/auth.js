@@ -4,9 +4,9 @@ const Usuario=require('../models/usuario')
 const { options } = require('../routes/auth')
 
 
-const logIn=(req,res)=>{
+const logIn=async(req,res)=>{
     const {_id}=req.usuario
-const token=await jwt.sign({_id},process.env.SECRETKEY,{
+const token=jwt.sign({_id},process.env.SECRETKEY,{
     expiresIn:'2h'
 })
 

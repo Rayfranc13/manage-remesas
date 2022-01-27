@@ -21,4 +21,4 @@ const BeneficiarioSchema= Schema({
 
 })
 
-module.exports= model('Beneficiario',BeneficiarioSchemaS)
+module.exports= model('Beneficiario',BeneficiarioSchema)
