@@ -17,7 +17,7 @@ if(!usuario.status){
     })
 }
 
-if(!(await bcrypt.compareSync(req.password,usuario.password))){
+if(!(bcrypt.compareSync(req.password,usuario.password))){
     return res.status(400).json({
         message:'El correo o el password son incorrectos'
     })
@@ -25,7 +25,7 @@ if(!(await bcrypt.compareSync(req.password,usuario.password))){
 
 req.usuario=usuario;
 
-next()
+
 
 }
 
