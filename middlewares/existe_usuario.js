@@ -12,10 +12,9 @@ if(!usuario){
     })
 }
 
-if(!usuario.status){
+if(!usuario.estado){
     return res.status(400).json({
-        message:'El correo o el password son incorrectos',
-        usuario
+        message:'El correo o el password son incorrectos',      
     })
 }
 
@@ -25,8 +24,10 @@ if(!(bcrypt.compareSync(password,usuario.password))){
     })
 }
 
-req.usuario=usuario;
+const {pass:password,...resto}=usuario;
+req.usuario=resto;
 
+next()
 
 
 }
