@@ -1,22 +1,16 @@
-const { response } = require("express")
+const jwt=require('jsonwebtoken')
 const { postUsuario } = require("./user")
-const { createWiseUser } = require("./wise")
+const Usuario=require('../models/usuario')
+const { options } = require('../routes/auth')
 
 
 const logIn=(req,res)=>{
-const {correo,password}=req.body
-console.log(req.body)
-if(!correo){
-    return res.status(400).json({
-        message:'El email es requerido'
-    })
-}
+    const {_id}=req.usuario
+const token=await jwt.sign({_id},process.env.SECRETKEY,{
+    expiresIn:'2h'
+})
 
-if(!password){
-    return res.status(400).json({
-        message:'El password es requerido'
-    })
-}
+
 return res.json({
     message:'El usuario ah accedido con exito'
 })
