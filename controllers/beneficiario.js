@@ -2,7 +2,7 @@ const{request,response}=require('express')
 const Beneficiario=require('../models/beneficiario')
 
 const getBeneficiarios=async(req=request,res)=>{
-    const id=req.id
+    const {id}=req.usuario
 
     const beneficiarios=await Beneficiario.find({usuario_id:id})
 res.json({
