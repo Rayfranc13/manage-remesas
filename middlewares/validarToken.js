@@ -1,3 +1,5 @@
+const jwt=require('jsonwebtoken')
+
 const validarToken=(req,res,next)=>{
 const token=req.header('token')
 if(!token){
