@@ -5,6 +5,7 @@ const {
   getBeneficiarios,
   postBeneficiario,
   putBeneficiario,
+  deleteBeneficiario
 } = require("../controllers/beneficiario");
 const { validarCampos } = require("../middlewares/validar_campos");
 const { propiedad } = require("../middlewares/validar_propiedad");

@@ -77,4 +77,5 @@ module.exports = {
   getBeneficiarios,
   postBeneficiario,
   putBeneficiario,
+  deleteBeneficiario
 };
