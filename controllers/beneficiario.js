@@ -30,6 +30,21 @@ const postBeneficiario=async(req,res)=>{
     })
 }
 
+putBeneficiario=(req,res)=>{
+const {id}=req.param
+const usuario_id=req.id
+try{
+const beneficiario= await Beneficiario.findByIdAndUpdate({_id:id,usuario_id})
+
+return res.status(201).json({
+    message:'El beneficiario se ha actualizado con exito',
+    beneficiario
+})
+}catch(e){
+
+}
+}
+
 module.exports={
     getBeneficiarios,
     postBeneficiario
