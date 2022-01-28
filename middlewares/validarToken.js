@@ -9,14 +9,14 @@ if(!token){
 }
 try{
 const decoded = jwt.verify(token, process.env.SECRETKEY);
-
+req.payload=decoded
+next()
 }catch(e){
     return res.status(401).json({
         message:'El token no es valido'
     })
 }
-req.payload=decoded
-next()
+
 }
 
 
