@@ -34,7 +34,7 @@ const putBeneficiario=async(req,res)=>{
 const {id}=req.param
 const {_id:usuario_id}=req.usuario
 try{
-const beneficiario= await Beneficiario.findByIdAndUpdate({_id:id,usuario_id})
+const beneficiario= await Beneficiario.findByIdAndUpdate(id)
 
 if(!beneficiario){
     return res.status(400).json({
