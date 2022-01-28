@@ -7,11 +7,12 @@ if(!token){
         message:'No esta autorizado para realizar esta operacion'
     })
 }
+
 try{
 const decoded = jwt.verify(token, process.env.SECRETKEY);
 const {id:usuario_id}=decoded
-req.id=id
-next()
+req.id=usuario_id
+return next()
 }catch(e){
     return res.status(401).json({
         message:'El token no es valido',
