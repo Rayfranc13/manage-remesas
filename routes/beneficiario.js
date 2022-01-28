@@ -20,6 +20,7 @@ router.post('/',[
 ],postBeneficiario)
 
 router.put('/:id',[
+    check('id','No es un id Valido').isMongoId(),
     check('nombre','El nombre no puede ser un numero').isString(),
     check('tarjeta','La tarjeta no es valida').isLength(16),
     validarCampos,

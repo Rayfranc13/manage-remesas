@@ -32,8 +32,9 @@ const postBeneficiario=async(req,res)=>{
 
 const putBeneficiario=async(req,res)=>{
 const {id}=req.params
+const{...rest}=req.body
 try{
-const beneficiario= await Beneficiario.findByIdAndUpdate(id)
+const beneficiario= await Beneficiario.findByIdAndUpdate(id,rest)
 
 if(!beneficiario){
     return res.status(400).json({
