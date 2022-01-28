@@ -24,10 +24,10 @@ const propiedadUsuario=async(req,res,next)=>{
   const usuario=req.usuario
   const newUsuario= await Usuario.findById(id)
   
-  if(!(newUsuario._id==usuario._id)){
+  if(!(id===usuario._id)){
     return res.json({
         message:'No esta autorizado para esta operacion',
-        newUsuario,
+        id,
         usuario
        
     })
