@@ -5,10 +5,10 @@ const {
   getBeneficiarios,
   postBeneficiario,
   putBeneficiario,
-  deleteBeneficiario
+  deleteBeneficiario,
 } = require("../controllers/beneficiario");
 const { validarCampos } = require("../middlewares/validar_campos");
-const { propiedad } = require("../middlewares/validar_propiedad");
+const { propiedad, propiedadBeneficiario } = require("../middlewares/validar_propiedad");
 const { existeBeneficiarioById } = require("../helpers/db_validator");
 const router = Router();
 
@@ -17,11 +17,12 @@ router.get("/", [validarToken], getBeneficiarios);
 router.post(
   "/",
   [
+    validarToken,
     check("nombre", "El nombre no puede estar vacio").notEmpty(),
     check("nombre", "El nombre no puede ser un numero").isString(),
     check("tarjeta", "La tarjeta no es valida").isLength(16),
     validarCampos,
-    validarToken,
+    
   ],
   postBeneficiario
 );
@@ -29,13 +30,13 @@ router.post(
 router.put(
   "/:id",
   [
+    validarToken,
     check("id", "No es un id Valido").isMongoId(),
     check("nombre", "El nombre no puede ser un numero").isString(),
     check("tarjeta", "La tarjeta no es valida").isLength(16),
     check("id").custom(existeBeneficiarioById),
     validarCampos,
-    validarToken,
-    propiedad,
+    propiedadBeneficiario,
   ],
   putBeneficiario
 );
@@ -43,11 +44,11 @@ router.put(
 router.delete(
   "/:id",
   [
+    validarToken,
     check("id", "No es un id Valido").isMongoId(),
     check("id").custom(existeBeneficiarioById),
     validarCampos,
-    validarToken,
-    propiedad,
+   propiedadBeneficiario,
   ],
   deleteBeneficiario
 );

@@ -8,14 +8,18 @@ const {
 } = require("../controllers/user");
 const { validarCampos } = require("../middlewares/validar_campos");
 const { existeCorreo, existeUsuarioById } = require("../helpers/db_validator");
+const { validarToken } = require("../middlewares/validarToken");
+const { permisos } = require("../middlewares/permisos");
 const router = Router();
 
 router.get(
   "/",
   [
+    validarToken,
     check("limite", "El limite es un numero").isNumeric(),
     check("desde", "EL origen no es un numero").isNumeric(),
     validarCampos,
+    
   ],
   getUsuarios
 );
@@ -23,6 +27,7 @@ router.get(
 router.post(
   "/",
   [
+    
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("nombre", "El nombre no puede ser un numero").isString(),
     check("apellido", "El apellido es obligatorio").not().isEmpty(),
@@ -45,9 +50,11 @@ router.post(
 router.put(
   "/:id",
   [
+    validarToken,
     check("id", "No es un id Valido").isMongoId(),
     check("id").custom(existeUsuarioById),
     validarCampos,
+    permisos
   ],
   putUsuario
 );
@@ -55,9 +62,11 @@ router.put(
 router.delete(
   "/:id",
   [
+    validarToken,
     check("id", "No es un id Valido").isMongoId(),
     check("id").custom(existeUsuarioById),
     validarCampos,
+    permisos
   ],
   deleteUsuario
 );
