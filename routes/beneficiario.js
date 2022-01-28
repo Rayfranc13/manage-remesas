@@ -3,6 +3,7 @@ const {check}=require('express-validator');
 const { validarToken } = require('../middlewares/validarToken');
 const {getBeneficiarios, postBeneficiario, putBeneficiario}=require('../controllers/beneficiario');
 const { validarCampos } = require('../middlewares/validar_campos');
+const { propiedad } = require('../middlewares/validar_propiedad');
 const router=Router()
 
 
@@ -19,11 +20,11 @@ router.post('/',[
 ],postBeneficiario)
 
 router.put('/:id',[
-    check('nombre','El nombre no puede estar vacio').notEmpty(),
     check('nombre','El nombre no puede ser un numero').isString(),
     check('tarjeta','La tarjeta no es valida').isLength(16),
     validarCampos,
-    validarToken
+    validarToken,
+    propiedad
 ],putBeneficiario)
 
 module.exports=router

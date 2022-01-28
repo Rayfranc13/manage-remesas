@@ -1,7 +1,7 @@
 const Beneficiario=require('../models/beneficiario')
 
 const propiedad=(req,res,next)=>{
-  const {id}=req.param
+  const {id}=req.params
   const usuario=req.usuario
   const beneficiario= Beneficiario.findById(id)
   if(beneficiario.usuario_id===usuario._id){
@@ -12,4 +12,8 @@ const propiedad=(req,res,next)=>{
       message:'No esta autorizado para esta operacion'
   })
 
+}
+
+module.exports={
+    propiedad
 }
