@@ -9,5 +9,5 @@ res.json({
 }
 
 module.exports={
-    getBeneficiario
+    getBeneficiarios
 }
