@@ -1,4 +1,5 @@
 const Usuario=require('../models/usuario')
+const Beneficiario=require('../models/beneficiario')
 
 const existeCorreo=async(correo='')=>{
 const existe= await Usuario.findOne({correo})
@@ -15,7 +16,15 @@ const existeUsuarioById=async(id)=>{
     }
     }
 
+    const existeBeneficiarioById=async(id)=>{
+        const existe= await Beneficiario.findById(id)
+        if(!existe){
+            throw new Error(`EL beneficiario de id(${id}) no existe`)
+        }
+    }
+
 module.exports={
     existeCorreo,
-    existeUsuarioById
+    existeUsuarioById,
+    existeBeneficiarioById
 }

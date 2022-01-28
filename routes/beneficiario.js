@@ -9,6 +9,7 @@ const {
 } = require("../controllers/beneficiario");
 const { validarCampos } = require("../middlewares/validar_campos");
 const { propiedad } = require("../middlewares/validar_propiedad");
+const { existeBeneficiarioById } = require("../helpers/db_validator");
 const router = Router();
 
 router.get("/", [validarToken], getBeneficiarios);
@@ -31,6 +32,7 @@ router.put(
     check("id", "No es un id Valido").isMongoId(),
     check("nombre", "El nombre no puede ser un numero").isString(),
     check("tarjeta", "La tarjeta no es valida").isLength(16),
+    check("id").custom(existeBeneficiarioById),
     validarCampos,
     validarToken,
     propiedad,
@@ -42,6 +44,7 @@ router.delete(
   "/:id",
   [
     check("id", "No es un id Valido").isMongoId(),
+    check("id").custom(existeBeneficiarioById),
     validarCampos,
     validarToken,
     propiedad,
