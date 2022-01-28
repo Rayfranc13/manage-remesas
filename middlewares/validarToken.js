@@ -8,7 +8,7 @@ if(!token){
     })
 }
 const decoded = jwt.verify(token, process.env.SECRETKEY);
-req.payload=(decoded.foo)
+req.payload=decoded
 next()
 }
 
