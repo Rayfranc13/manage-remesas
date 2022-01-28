@@ -1,5 +1,5 @@
 const jwt=require('jsonwebtoken');
-const { findById } = require('../models/beneficiario');
+const Usuario = require('../models/usuario');
 
 const validarToken=(req,res,next)=>{
 const token=req.header('token')
@@ -12,7 +12,7 @@ if(!token){
 try{
 const decoded = jwt.verify(token, process.env.SECRETKEY);
 const {id:usuario_id}=decoded
-const usuario= await findById(usuario_id)
+const usuario= await Usuario.findById(usuario_id)
 req.usuario=usuario
 return next()
 }catch(e){
