@@ -1,5 +1,5 @@
 const validarToken=(req,res,next)=>{
-const token=req.headers('token')
+const token=req.header('token')
 if(!token){
     return res.status(401).json({
         message:'No esta autorizado para realizar esta operacion'
