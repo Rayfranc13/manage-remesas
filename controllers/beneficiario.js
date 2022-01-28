@@ -30,7 +30,7 @@ const postBeneficiario=async(req,res)=>{
     })
 }
 
-const putBeneficiario=(req,res)=>{
+const putBeneficiario=async(req,res)=>{
 const {id}=req.param
 const {_id:usuario_id}=req.usuario
 try{
