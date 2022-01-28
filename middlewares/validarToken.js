@@ -9,7 +9,8 @@ if(!token){
 }
 try{
 const decoded = jwt.verify(token, process.env.SECRETKEY);
-req.payload=decoded
+const {id:usuario_id}=decoded
+req.id=id
 
 }catch(e){
     return res.status(401).json({
