@@ -13,7 +13,7 @@ res.json({
 
 const postBeneficiario=async(req,res)=>{
     const {nombre,apellido,tarjeta}=req.body
-    const usuario_id=req.id
+    const {_id:usuario_id}=req.usuario
 
     const beneficiario=new Beneficiario({nombre,apellido,tarjeta,usuario_id})
     try{
@@ -30,22 +30,31 @@ const postBeneficiario=async(req,res)=>{
     })
 }
 
-putBeneficiario=(req,res)=>{
+const putBeneficiario=(req,res)=>{
 const {id}=req.param
-const usuario_id=req.id
+const {_id:usuario_id}=req.usuario
 try{
 const beneficiario= await Beneficiario.findByIdAndUpdate({_id:id,usuario_id})
+
+if(!beneficiario){
+    return res.status(400).json({
+        message:'El beneficiario no existe'
+    })
+}
 
 return res.status(201).json({
     message:'El beneficiario se ha actualizado con exito',
     beneficiario
 })
 }catch(e){
-
+  return res.status(500).json({
+      message:'Error al actualizar beneficiario'
+  })
 }
 }
 
 module.exports={
     getBeneficiarios,
-    postBeneficiario
+    postBeneficiario,
+    putBeneficiario
 }
