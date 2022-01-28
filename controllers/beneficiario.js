@@ -1,61 +1,80 @@
-const{request,response}=require('express')
-const Beneficiario=require('../models/beneficiario')
+const { request, response } = require("express");
+const Beneficiario = require("../models/beneficiario");
 
-const getBeneficiarios=async(req=request,res)=>{
-    const {id}=req.usuario
+const getBeneficiarios = async (req = request, res) => {
+  const { id } = req.usuario;
 
-    const beneficiarios=await Beneficiario.find({usuario_id:id})
-res.json({
-    beneficiarios
-})
-}
+  const beneficiarios = await Beneficiario.find({ usuario_id: id });
+  res.json({
+    beneficiarios,
+  });
+};
 
+const postBeneficiario = async (req, res) => {
+  const { nombre, apellido, tarjeta } = req.body;
+  const { _id: usuario_id } = req.usuario;
 
-const postBeneficiario=async(req,res)=>{
-    const {nombre,apellido,tarjeta}=req.body
-    const {_id:usuario_id}=req.usuario
+  const beneficiario = new Beneficiario({
+    nombre,
+    apellido,
+    tarjeta,
+    usuario_id,
+  });
+  try {
+    await beneficiario.save();
+  } catch (e) {
+    res.status(500).json({
+      message: "Error al insertar beneficiario",
+    });
+  }
 
-    const beneficiario=new Beneficiario({nombre,apellido,tarjeta,usuario_id})
-    try{
-        await beneficiario.save()
-    }catch(e){
-        res.status(500).json({
-            message:"Error al insertar beneficiario"
-        })
+  res.status(201).json({
+    message: "El beneficiario se ha insertado con exito",
+    beneficiario,
+  });
+};
+
+const putBeneficiario = async (req, res) => {
+  const { id } = req.params;
+  const { ...rest } = req.body;
+  try {
+    const beneficiario = await Beneficiario.findByIdAndUpdate(id, rest);
+
+    if (!beneficiario) {
+      return res.status(400).json({
+        message: "El beneficiario no existe",
+        id,
+      });
     }
 
-    res.status(201).json({
-        message:"El beneficiario se ha insertado con exito",
-        beneficiario
-    })
-}
+    return res.status(201).json({
+      message: "El beneficiario se ha actualizado con exito",
+      beneficiario,
+    });
+  } catch (e) {
+    return res.status(500).json({
+      message: "Error al actualizar beneficiario",
+    });
+  }
+};
 
-const putBeneficiario=async(req,res)=>{
-const {id}=req.params
-const{...rest}=req.body
-try{
-const beneficiario= await Beneficiario.findByIdAndUpdate(id,rest)
+const deleteBeneficiario = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const beneficiario = await Beneficiario.findByIdAndDelete(id);
+    res.json({
+      message: "El beneficairio se ha eliminado con exito",
+      beneficiario,
+    });
+  } catch (e) {
+    return res.status(500).json({
+      message: "Error al eliminar beneficiario",
+    });
+  }
+};
 
-if(!beneficiario){
-    return res.status(400).json({
-        message:'El beneficiario no existe',
-        id
-    })
-}
-
-return res.status(201).json({
-    message:'El beneficiario se ha actualizado con exito',
-    beneficiario
-})
-}catch(e){
-  return res.status(500).json({
-      message:'Error al actualizar beneficiario'
-  })
-}
-}
-
-module.exports={
-    getBeneficiarios,
-    postBeneficiario,
-    putBeneficiario
-}
+module.exports = {
+  getBeneficiarios,
+  postBeneficiario,
+  putBeneficiario,
+};

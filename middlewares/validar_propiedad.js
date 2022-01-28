@@ -8,8 +8,7 @@ const propiedad=async(req,res,next)=>{
   if(!(beneficiario.usuario_id==usuario._id)){
     return res.json({
         message:'No esta autorizado para esta operacion',
-        beneficiario,
-        usuario
+       
     })
   } 
  return next()
