@@ -1,7 +1,7 @@
 const jwt=require('jsonwebtoken');
 const Usuario = require('../models/usuario');
 
-const validarToken=(req,res,next)=>{
+const validarToken=async(req,res,next)=>{
 const token=req.header('token')
 if(!token){
     return res.status(401).json({
