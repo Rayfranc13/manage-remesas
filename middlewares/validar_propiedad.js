@@ -1,9 +1,9 @@
 const Beneficiario=require('../models/beneficiario')
 
-const propiedad=(req,res,next)=>{
+const propiedad=async(req,res,next)=>{
   const {id}=req.params
   const usuario=req.usuario
-  const beneficiario= Beneficiario.findById(id)
+  const beneficiario= await Beneficiario.findById(id)
   
   if(!(beneficiario.usuario_id==usuario._id)){
     return res.json({
