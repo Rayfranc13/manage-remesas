@@ -27,6 +27,8 @@ const propiedadUsuario=async(req,res,next)=>{
   if(!(newUsuario._id==usuario._id)){
     return res.json({
         message:'No esta autorizado para esta operacion',
+        newUsuario,
+        usuario
        
     })
   } 
