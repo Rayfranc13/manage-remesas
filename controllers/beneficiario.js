@@ -32,7 +32,6 @@ const postBeneficiario=async(req,res)=>{
 
 const putBeneficiario=async(req,res)=>{
 const {id}=req.params
-const {_id:usuario_id}=req.usuario
 try{
 const beneficiario= await Beneficiario.findByIdAndUpdate(id)
 
