@@ -7,19 +7,23 @@ const {
   deleteUsuario,
 } = require("../controllers/user");
 const { validarCampos } = require("../middlewares/validar_campos");
-const { existeCorreo, existeUsuarioById, existeActiveUsuarioById } = require("../helpers/db_validator");
+const {
+  existeCorreo,
+  existeUsuarioById,
+  existeActiveUsuarioById,
+} = require("../helpers/db_validator");
 const { validarToken } = require("../middlewares/validarToken");
-const { permisos } = require("../middlewares/permisos");
+const { permisos, isAdmin } = require("../middlewares/permisos");
 const router = Router();
 
 router.get(
   "/",
   [
     validarToken,
+    isAdmin,
     check("limite", "El limite es un numero").isNumeric(),
     check("desde", "EL origen no es un numero").isNumeric(),
     validarCampos,
-    
   ],
   getUsuarios
 );
@@ -27,7 +31,6 @@ router.get(
 router.post(
   "/",
   [
-    
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("nombre", "El nombre no puede ser un numero").isString(),
     check("apellido", "El apellido es obligatorio").not().isEmpty(),
@@ -54,7 +57,7 @@ router.put(
     check("id", "No es un id Valido").isMongoId(),
     check("id").custom(existeUsuarioById),
     validarCampos,
-    permisos
+    permisos,
   ],
   putUsuario
 );
@@ -66,7 +69,7 @@ router.delete(
     check("id", "No es un id Valido").isMongoId(),
     check("id").custom(existeActiveUsuarioById),
     validarCampos,
-    permisos
+    permisos,
   ],
   deleteUsuario
 );
