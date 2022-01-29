@@ -10,7 +10,7 @@ if(existe){
 
 
 const existeUsuarioById=async(id)=>{
-    const existe= await Usuario.find({estado:true,_id:id})
+    const existe= await Usuario.findOne({estado:true,_id:id})
     if(!existe){
         throw new Error(`El usuario de id(${id}) no existe`)
     }
