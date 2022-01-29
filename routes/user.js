@@ -7,7 +7,7 @@ const {
   deleteUsuario,
 } = require("../controllers/user");
 const { validarCampos } = require("../middlewares/validar_campos");
-const { existeCorreo, existeUsuarioById } = require("../helpers/db_validator");
+const { existeCorreo, existeUsuarioById, existeActiveUsuarioById } = require("../helpers/db_validator");
 const { validarToken } = require("../middlewares/validarToken");
 const { permisos } = require("../middlewares/permisos");
 const router = Router();
@@ -64,7 +64,7 @@ router.delete(
   [
     validarToken,
     check("id", "No es un id Valido").isMongoId(),
-    check("id").custom(existeUsuarioById),
+    check("id").custom(existeActiveUsuarioById),
     validarCampos,
     permisos
   ],

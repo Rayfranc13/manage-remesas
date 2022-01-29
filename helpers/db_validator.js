@@ -10,11 +10,18 @@ if(existe){
 
 
 const existeUsuarioById=async(id)=>{
-    const existe= await Usuario.findOne({estado:true,_id:id})
+    const existe= await Usuario.findOne({_id:id})
     if(!existe){
         throw new Error(`El usuario de id(${id}) no existe`)
     }
     }
+
+    const existeActiveUsuarioById=async(id)=>{
+        const existe= await Usuario.findOne({estado:true,_id:id})
+        if(!existe){
+            throw new Error(`El usuario de id(${id}) no existe`)
+        }
+        }
 
     const existeBeneficiarioById=async(id)=>{
         const existe= await Beneficiario.findById(id)
@@ -26,5 +33,6 @@ const existeUsuarioById=async(id)=>{
 module.exports={
     existeCorreo,
     existeUsuarioById,
-    existeBeneficiarioById
+    existeBeneficiarioById,
+    existeActiveUsuarioById
 }
