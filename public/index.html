@@ -47,8 +47,10 @@
           </nav>
     </header> 
     <div class="container">   
+        
+    <div class="jumbotron">
         <div class="row">
-    <div class="jumbotron col-7 ">
+        <div class="col-sm">
         <h1 class="display-4">¿Por que nosotros?</h1>
         <p class="lead">Simplemente garantizamos los mejores precios del mercado, una rapida y eficas via para enviar remesas a cualquier parte del mundo.</p>
         <hr class="my-4">
@@ -56,25 +58,46 @@
         <p class="lead">
           <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
         </p>
-        
-        </div>
-        <div class="col-5 p-0">
+    </div>
+        <div class="col-sm p-0">
+            <div class="container ">
             <div class="card siu ">
+                <div class="card-body">
+                <h5 class="card-title">Empiese a enviar</h5>
                 <div class="container ">
+                    
             <form>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Cantidad</label>
-                  <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="1000">
+                  <input type="number" class="form-control" id="exampleInputEmail1" oninput="calcularPago()" aria-describedby="emailHelp" placeholder="1000">
                   <small id="emailHelp" class="form-text text-muted">Ingrese la cantidad en usd a recibir.</small>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Total a pagar</label>
-                  <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Resultado aqui">
+                  <input type="number" class="form-control" readonly id="exampleInputPassword1" aria-describedby="passwoedHelp" placeholder="Resultado aqui">
+                  <small id="passwoedHelp" class="form-text text-muted">Fijaremos la taza de cambio por 2 horas</small>
                 </div>
+                <div class="row">
                 <button type="submit" class="btn btn-primary">Enviar</button>
+                <span class="col-7"></span>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Moneda
+                    </button>
+                    <div class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton">
+                      <button class="dropdown-item" onclick="getCurrency(this)">EUR</button>
+                      <button class="dropdown-item"  onclick="getCurrency(this)">USD</button>
+                      <button class="dropdown-item"  onclick="getCurrency(this)">BGP</button>
+                    </div>
+                  </div>
+                </div>
               </form>
            </div>
         </div>
+        </div>
+    </div>
+        </div>
+       
       </div>
     </div>
 </div>
@@ -84,5 +107,36 @@
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </script>
+    <script>
+        let razon=1
+        const calcularPago=()=>{
+           const cant= document.getElementById('exampleInputEmail1').value
+           const costo =document.getElementById('exampleInputPassword1')
+           costo.value=cant*razon
+        }
+       
+
+        const getCurrency=(elemento)=>{
+            const tarjet=document.getElementById('dropdownMenuButton')
+            tarjet.innerHTML=elemento.innerHTML
+            
+           const currency=elemento.innerHTML
+            const texto=document.getElementById('passwoedHelp')
+            
+            switch(currency){
+                case 'EUR':
+                razon=1.18
+break
+case 'USD':
+razon=1
+break
+case 'BGP':
+    razon=1.25
+    break
+            }
+            texto.innerHTML=`La taza de cambio actual de ${currency} vs USD es : ${razon}`
+            calcularPago()
+        }
     </script>
 </html>
