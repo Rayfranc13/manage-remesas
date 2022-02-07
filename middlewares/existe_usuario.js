@@ -26,7 +26,7 @@ if(!(bcrypt.compareSync(password,usuario.password))){
 
 const {password:pass,...user}=usuario;
 req.usuario=user;
-console.log(user)
+console.log(usuario.toJSON())
 
 next()
 
