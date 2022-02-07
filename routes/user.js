@@ -2,6 +2,7 @@ const { Router } = require("express");
 const { check } = require("express-validator");
 const {
   getUsuarios,
+  getMyInfo,
   postUsuario,
   putUsuario,
   deleteUsuario,
@@ -27,6 +28,10 @@ router.get(
   ],
   getUsuarios
 );
+
+router.get('/myinfo',[
+  validarToken
+],getMyInfo)
 
 
 router.post(

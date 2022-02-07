@@ -73,11 +73,19 @@ const deleteUsuario= async (req,res)=>{
  })
 }
 
+const getMyInfo=(req,res)=>{
+const {usuario}=req
+res.json(
+    usuario
+)
+}
+
 
 
 
 module.exports={
     getUsuarios,
+    getMyInfo,
     postUsuario,
     putUsuario,
     deleteUsuario
