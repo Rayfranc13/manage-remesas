@@ -5,7 +5,8 @@ const { options } = require('../routes/auth')
 
 
 const logIn=async(req,res)=>{
-    const id=req.id
+    const {_id,...usuario}=req.usuario
+
 const token=jwt.sign({id},process.env.SECRETKEY,{
     expiresIn:'2h'
 })
@@ -13,10 +14,13 @@ const token=jwt.sign({id},process.env.SECRETKEY,{
 
 return res.json({
     message:'El usuario ah accedido con exito',
+    usuario,
     token
 })
 
 }
+
+
 
 
 

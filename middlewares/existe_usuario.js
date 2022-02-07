@@ -24,8 +24,8 @@ if(!(bcrypt.compareSync(password,usuario.password))){
     })
 }
 
-const {_id}=usuario;
-req.id=_id;
+const {password,...user}=usuario;
+req.usuario=user;
 
 next()
 
